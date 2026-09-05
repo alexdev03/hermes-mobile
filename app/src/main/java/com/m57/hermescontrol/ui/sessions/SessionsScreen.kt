@@ -617,7 +617,7 @@ fun SessionsScreen(
                                 modifier = Modifier.size(18.dp),
                             )
                             Spacer(modifier = Modifier.width(spacing.xs))
-                            Text(stringResource(R.string.sessions_empty_cleanup_all_history))
+                            Text(stringResource(R.string.sessions_empty_cleanup_desc))
                         }
                     }
                 }
@@ -823,7 +823,7 @@ fun SessionsScreen(
                                                     modifier = Modifier.size(20.dp),
                                                 )
                                                 Text(
-                                                    text = stringResource(R.string.sessions_action_prune_all_history),
+                                                    text = stringResource(R.string.sessions_action_prune),
                                                     style = MaterialTheme.typography.labelMedium,
                                                     color = statusColors.warning,
                                                     fontWeight = FontWeight.SemiBold,
@@ -946,12 +946,13 @@ fun SessionsScreen(
                                                 Column {
                                                     Text(
                                                         text =
-                                                            group.jobId?.let {
-                                                                stringResource(
-                                                                    R.string.sessions_section_automation_job,
-                                                                    it,
-                                                                )
-                                                            } ?: stringResource(
+                                                            group.title
+                                                                ?: group.jobId?.let {
+                                                                    stringResource(
+                                                                        R.string.sessions_section_automation_job,
+                                                                        it,
+                                                                    )
+                                                                } ?: stringResource(
                                                                 R.string.sessions_section_automation_unknown,
                                                             ),
                                                         style = MaterialTheme.typography.titleSmall,

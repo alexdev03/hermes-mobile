@@ -590,13 +590,11 @@
     <string name="sessions_section_automation_unknown">Automation run</string>
     <string name="sessions_section_automation_runs">%1$d loaded run(s)</string>
     <string name="sessions_action_prune">Prune</string>
-    <string name="sessions_action_prune_all_history">Prune all history</string>
     <string name="sessions_prune_title">Prune Old Sessions</string>
     <string name="sessions_prune_desc">Delete sessions older than the specified number of days.</string>
     <string name="sessions_prune_days_label">Days threshold</string>
     <string name="sessions_prune_confirm">Prune</string>
     <string name="sessions_empty_cleanup_desc">Empty</string>
-    <string name="sessions_empty_cleanup_all_history">Empty in all history</string>
     <string name="sessions_empty_cleanup_title">Delete empty sessions?</string>
     <string name="sessions_empty_cleanup_message">Delete %1$d empty session(s). Active and archived sessions are kept.</string>
     <string name="sessions_empty_cleanup_confirm">Delete</string>

@@ -53,4 +53,26 @@ class HistorySessionGroupsTest {
         val groups = automationGroups(listOf(SessionInfo("cron_job_20260905_100000", source = "cli")))
         assertNull(groups.single().jobId)
     }
+
+    @Test
+    fun derivesJobTitleFromLatestSessionWhileGroupingByJobId() {
+        val groups =
+            automationGroups(
+                listOf(
+                    SessionInfo(
+                        "cron_nightly_20260905_100000",
+                        title = "Nightly Backup · Sep 05 10:00",
+                        source = "cron",
+                    ),
+                    SessionInfo(
+                        "cron_nightly_20260905_090000",
+                        title = "Nightly Backup · Sep 05 09:00",
+                        source = "cron",
+                    ),
+                ),
+            )
+        assertEquals(1, groups.size)
+        assertEquals("nightly", groups.single().jobId)
+        assertEquals("Nightly Backup", groups.single().title)
+    }
 }

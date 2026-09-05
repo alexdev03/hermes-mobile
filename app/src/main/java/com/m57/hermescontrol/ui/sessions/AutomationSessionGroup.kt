@@ -6,6 +6,7 @@ internal data class AutomationSessionGroup(
     val key: String,
     val jobId: String?,
     val sessions: List<SessionInfo>,
+    val title: String? = null,
 )
 
 // cron.scheduler mints durable run IDs as cron_{job_id}_{YYYYMMDD_HHMMSS}.
@@ -20,9 +21,18 @@ internal fun automationGroups(sessions: List<SessionInfo>): List<AutomationSessi
                 if (session.source == "cron") CRON_RUN_ID.matchEntire(session.id)?.groupValues?.get(1) else null
             jobId?.let { "job:$it" } ?: "session:${session.id}"
         }.map { (key, runs) ->
+            val jobId = key.takeIf { it.startsWith("job:") }?.removePrefix("job:")
+            val title =
+                runs
+                    .mapNotNull { it.title?.takeIf(String::isNotBlank) }
+                    .firstOrNull()
+                    ?.substringBeforeLast(" · ")
+                    ?.trim()
+                    ?.takeIf(String::isNotBlank)
             AutomationSessionGroup(
                 key = key,
-                jobId = key.takeIf { it.startsWith("job:") }?.removePrefix("job:"),
+                jobId = jobId,
+                title = title,
                 sessions = runs,
             )
         }
